@@ -1,0 +1,132 @@
+﻿@model IEnumerable<Devengers2019.Models.Student>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+@using (Html.BeginForm("Index", "Students", FormMethod.Get))
+{
+    <b>Search By:</b> @Html.RadioButton("searchType", "Name") <text>Name</text>
+
+    @Html.RadioButton("searchType", "Surname") <text>Surname</text>
+
+    @Html.RadioButton("searchType", "StudentNo") <text>Student Number</text>
+
+    @Html.RadioButton("searchType", "ShowAll") <text>Show All</text>
+
+    <br />
+
+    @Html.TextBox("searchParam")<input type="submit" value="Search" />
+    @*@Html.ActionLink("Download", "ExportData")*@
+    using (Html.BeginForm("ExportData", "Students", FormMethod.Post))
+    {
+        <input type="hidden" name="GridHtml" />
+        <input type="submit" id="btnSubmit" value="Download PDF" />
+    }
+    @Html.ActionLink("Create New", "Create")
+
+
+}
+
+
+<style>
+    table {
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+        color: white;
+    }
+
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+</style>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(x => x.ImageUrl)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StudentNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TelephoneNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mobile)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+    <tr>
+        <td>
+            <img src="@item.ImageUrl" width="120" height="120" alt="" />
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StudentNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TelephoneNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mobile)
+        </td>
+        <td>
+            @if (item.IsActive == true)
+            {
+                <span style="color:green;" class="glyphicon glyphicon-flag"></span>
+            }
+            else if (item.IsActive == false)
+            {
+                <span style="color:red;" class="glyphicon glyphicon-flag"></span>
+
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "EditStudent", new { id = item.StudentID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.StudentID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.StudentID })
+        </td>
+    </tr>
+    }
+
+</table>

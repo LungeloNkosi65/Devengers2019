@@ -147,6 +147,10 @@ figure {
   margin: 0;
 }
 
+background1{
+    background-color: lawngreen;
+}
+
 fieldset {
   padding: 0.35em 0.625em 0.75em;
   margin: 0 2px;
