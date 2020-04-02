@@ -60,7 +60,7 @@ namespace Devengers2019.Controllers
         public async Task<ActionResult> ExportData()
         {
             //Student s = new Student();
-            //jlll
+            //
             var items = await DocumentDBRepository<Student>.GetItemsAsync(s=> s.IsActive || !s.IsActive);
 
             GridView gv = new GridView();
